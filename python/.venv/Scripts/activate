@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="c:\Users\pawel\OneDrive\Pulpit\Prog\raspberry_pi_vehicle\.venv"
+VIRTUAL_ENV="c:\Users\pawel\OneDrive\Pulpit\Prog\raspberry_pi_vehicle\python\.venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
