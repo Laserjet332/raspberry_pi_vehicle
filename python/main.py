@@ -1,12 +1,14 @@
 from ui import Interface
 from devices import Motor
+import RPi.GPIO as GPIO
 
-OUTPUT1 = 
-OUTPUT2 = 
-ENABLE1 = 
-OUTPUT3 = 
-OUTPUT4 = 
-ENABLE2 = 
+GPIO.setmode(GPIO.BCM)
+OUTPUT1 = 14  
+OUTPUT2 = 15
+ENABLE1 = 18
+OUTPUT3 = 2
+OUTPUT4 = 3
+ENABLE2 = 4
 
 def update_value_motor1(event):
     motor1.change_speed(interface.slider1.get())
