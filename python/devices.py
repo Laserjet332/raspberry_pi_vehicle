@@ -1,0 +1,135 @@
+import RPi.GPIO as GPIO
+
+
+class DistanceSensor():
+    def __init__(self,echo: int,trigger: int) -> None:
+        self.echo = echo
+        self.trigger = trigger
+        
+
+class Motor():
+    def __init__(self,output1: int,output2: int,enable: int,speed: int) -> None:
+        self.output1 = output1
+        GPIO.setup(self.output1,GPIO.OUT,initial=GPIO.LOW)
+        
+        self.output2 = output2
+        GPIO.setup(self.output2,GPIO.OUT,initial=GPIO.LOW)
+        
+        GPIO.setup(enable,GPIO.OUT)
+        self.enable = GPIO.PWM(enable,100)
+        self.enable.start(speed)       
+        self.speed = speed
+    
+    def forward(self) -> None:
+        GPIO.output(self.output1,GPIO.HIGH)
+        GPIO.output(self.output2,GPIO.LOW)
+    
+    def backward(self) -> None:
+        GPIO.output(self.output1,GPIO.LOW)
+        GPIO.output(self.output2,GPIO.HIGH)
+    
+    def stop(self) -> None:
+        GPIO.output(self.output1,GPIO.LOW)
+        GPIO.output(self.output2,GPIO.LOW)
+    
+    def change_speed(self,speed: int) -> None:
+        if speed > 100:
+            speed = 100
+        elif speed < 0:
+            speed = 0
+        self.speed = speed
+        self.enable.ChangeDutyCycle(self.speed)
+
+
+class Robot():
+    def __init__(self,output1: int,output2: int,enable1: int,output3: int,output4: int,enable2: int) -> None:
+        self.motor_left = Motor(output1 ,output2,enable1,40)
+        self.motor_right = Motor(output3,output4,enable2,40)
+        self.moving_forward = False
+        self.moving_backward = False
+        self.turning_left = False
+        self.turning_right = False
+        self.speed = 40
+        self.distance_sensors = []
+    
+    def forward(self):
+        if not self.moving_backward:
+            self.moving_forward = True
+            self.motor_left.forward()
+            self.motor_right.forward()
+            
+        if self.turning_right:
+            self.moving_forward = True
+            self.motor_left.forward()
+            self.motor_right.change_speed(self.speed+20)
+            
+        if self.turning_left:
+            self.moving_forward = True
+            self.motor_right.forward()
+            self.motor_left.change_speed(self.speed+20)
+    
+    def backward(self):
+        if not self.moving_forward:
+            self.moving_backward = True
+            self.motor_left.backward()
+            self.motor_right.backward()
+    
+    def stop(self):
+        if self.moving_forward:
+            self.moving_forward = False
+            if self.turning_right:
+                self.right()
+            elif self.turning_left:
+                self.left()
+        elif self.moving_backward:
+            self.moving_backward = False
+            self.motor_left.stop()
+            self.motor_right.stop()
+    
+    def right(self):
+        if not self.moving_forward or not self.moving_backward or not self.turning_left:
+            self.motor_right.forward()
+            self.motor_left.backward()
+            self.turning_right = True
+        elif self.turning_left:
+            pass
+        else:
+            self.motor_right.change_speed(self.speed+20)
+            self.turning_right = True
+    
+    def stop_right(self):
+        if self.moving_forward:
+            self.motor_right.change_speed(self.speed)
+            self.turning_right = False
+        else:
+            self.motor_right.stop()
+            self.motor_left.stop()
+            self.turning_right = False
+    
+    def left(self):
+        if not self.moving_forward or not self.moving_backward or not self.turning_right:
+            self.motor_right.backward()
+            self.motor_left.forward()
+            self.turning_left = True
+        elif self.turning_right:
+            pass
+        else:
+            self.motor_left.change_speed(self.speed+20)
+            self.turning_left = True
+    
+    def stop_left(self):
+        if self.moving_forward:
+            self.motor_left.change_speed(self.speed)
+            self.turning_left = False
+        else:
+            self.motor_right.stop()
+            self.motor_left.stop()
+            self.turning_left = False
+    
+    def change_speed(self,speed):
+        self.speed = speed
+        self.motor_left.change_speed(self.speed)
+        self.motor_right.change_speed(self.speed)
+    
+    def add_distance_sensor(self,sensor: type[DistanceSensor]):
+        pass
