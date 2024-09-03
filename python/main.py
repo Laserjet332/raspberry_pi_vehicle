@@ -21,7 +21,7 @@ interface = Interface()
 interface.slider1.bind("<ButtonRelease-1>",update_value_motor1)
 interface.slider2.bind("<ButtonRelease-1>",update_value_motor2)
 
-motor1 = Motor(OUTPUT1,OUTPUT2,ENABLE1)
-motor2 = Motor(OUTPUT3,OUTPUT4,ENABLE2)
+motor1 = Motor(OUTPUT1,OUTPUT2,ENABLE1,0)
+motor2 = Motor(OUTPUT3,OUTPUT4,ENABLE2,0)
 
 interface.window.mainloop()
