@@ -32,7 +32,6 @@ class Interface:
         
         self.window.grid_columnconfigure((0, 1), weight=1)
         self.window.resizable(False,False)
-        self.window.mainloop()
     
     def get_slider1_value(self):
         return self.value_1
