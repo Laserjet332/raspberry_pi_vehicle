@@ -81,6 +81,9 @@ class Robot():
                 self.right()
             elif self.turning_left:
                 self.left()
+            else:
+                self.motor_left.stop()
+                self.motor_right.stop()
         elif self.moving_backward:
             self.moving_backward = False
             self.motor_left.stop()
