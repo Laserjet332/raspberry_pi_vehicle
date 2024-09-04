@@ -90,7 +90,7 @@ class Robot():
             self.motor_right.stop()
     
     def right(self):
-        if not self.moving_forward or not self.moving_backward or not self.turning_left:
+        if not self.moving_forward and not self.moving_backward and not self.turning_left:
             self.motor_right.forward()
             self.motor_left.backward()
             self.turning_right = True
@@ -110,7 +110,7 @@ class Robot():
             self.turning_right = False
     
     def left(self):
-        if not self.moving_forward or not self.moving_backward or not self.turning_right:
+        if not self.moving_forward and not self.moving_backward and not self.turning_right:
             self.motor_right.backward()
             self.motor_left.forward()
             self.turning_left = True
