@@ -25,17 +25,6 @@ class Interface:
         self.right.grid(row=1,column=2,padx=2,pady=2)
         self.right_pressed = False
         
-        self.speed_scale = tk.Scale(self.window,from_=2,to=1,showvalue=0,label="Low Speed")
-        self.speed_value = 1
-        self.speed_scale .grid(row=0,column=4,rowspan=2,padx=30,pady=2)
-        
         self.window.grid_columnconfigure((0, 1), weight=1)
         self.window.resizable(False,False)
-    
-    def update_scale_label(self,value):
-        self.speed_value = int(value)
-        if self.speed_value == 1:
-            self.speed_scale.config(label="Low Speed")
-        elif self.speed_value == 2:
-            self.speed_scale.config(label="High Speed")
         

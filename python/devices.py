@@ -49,7 +49,7 @@ class Robot():
         self.moving_backward = False
         self.turning_left = False
         self.turning_right = False
-        self.speed = 40
+        self.speed = 80
         self.distance_sensors = []
     
     def forward(self):
@@ -61,13 +61,13 @@ class Robot():
         if self.turning_right:
             self.moving_forward = True
             self.motor_left.forward()
-            self.motor_left.change_speed(self.speed-40)
+            self.motor_left.change_speed(self.speed-60)
             self.motor_right.change_speed(self.speed+20)
             
         if self.turning_left:
             self.moving_forward = True
             self.motor_right.forward()
-            self.motor_right.change_speed(self.speed-40)
+            self.motor_right.change_speed(self.speed-60)
             self.motor_left.change_speed(self.speed+20)
     
     def backward(self):
@@ -99,7 +99,7 @@ class Robot():
         elif self.turning_left:
             pass
         else:
-            self.motor_left.change_speed(self.speed-40)
+            self.motor_left.change_speed(self.speed-60)
             self.motor_right.change_speed(self.speed+20)
             self.turning_right = True
     
@@ -121,7 +121,7 @@ class Robot():
         elif self.turning_right:
             pass
         else:
-            self.motor_right.change_speed(self.speed-40)
+            self.motor_right.change_speed(self.speed-60)
             self.motor_left.change_speed(self.speed+20)
             self.turning_left = True
     

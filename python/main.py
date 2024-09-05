@@ -75,16 +75,4 @@ def stop_left(event):
 interface.window.bind("<KeyPress-a>",go_left)
 interface.window.bind("<KeyRelease-a>",stop_left)
 
-
-def update_scale_label(value):
-        interface.speed_value = int(value)
-        if interface.speed_value == 1:
-            interface.speed_scale.config(label="Low Speed")
-            robot.change_speed(LOW_SPEED)
-        elif interface.speed_value == 2:
-            interface.speed_scale.config(label="High Speed")
-            robot.change_speed(HIGH_SPEED)
-            
-interface.speed_scale.config(command=update_scale_label)
-
 interface.window.mainloop()
