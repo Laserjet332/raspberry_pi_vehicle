@@ -9,8 +9,6 @@ ENABLE1 = 18
 OUTPUT3 = 3
 OUTPUT4 = 2
 ENABLE2 = 4
-LOW_SPEED = 40
-HIGH_SPEED = 80
 
 
 interface = Interface()

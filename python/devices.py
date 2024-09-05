@@ -58,13 +58,13 @@ class Robot():
             self.motor_left.forward()
             self.motor_right.forward()
             
-        if self.turning_right:
+        elif self.turning_right:
             self.moving_forward = True
             self.motor_left.forward()
             self.motor_left.change_speed(self.speed-60)
             self.motor_right.change_speed(self.speed+20)
             
-        if self.turning_left:
+        elif self.turning_left:
             self.moving_forward = True
             self.motor_right.forward()
             self.motor_right.change_speed(self.speed-60)
