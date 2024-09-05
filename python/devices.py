@@ -61,11 +61,13 @@ class Robot():
         if self.turning_right:
             self.moving_forward = True
             self.motor_left.forward()
+            self.motor_left.change_speed(self.speed-20)
             self.motor_right.change_speed(self.speed+20)
             
         if self.turning_left:
             self.moving_forward = True
             self.motor_right.forward()
+            self.motor_right.change_speed(self.speed-20)
             self.motor_left.change_speed(self.speed+20)
     
     def backward(self):
@@ -97,11 +99,13 @@ class Robot():
         elif self.turning_left:
             pass
         else:
+            self.motor_left.change_speed(self.speed-20)
             self.motor_right.change_speed(self.speed+20)
             self.turning_right = True
     
     def stop_right(self):
         if self.moving_forward:
+            self.motor_left.change_speed(self.speed)
             self.motor_right.change_speed(self.speed)
             self.turning_right = False
         else:
@@ -117,11 +121,13 @@ class Robot():
         elif self.turning_right:
             pass
         else:
+            self.motor_right.change_speed(self.speed-20)
             self.motor_left.change_speed(self.speed+20)
             self.turning_left = True
     
     def stop_left(self):
         if self.moving_forward:
+            self.motor_right.change_speed(self.speed)
             self.motor_left.change_speed(self.speed)
             self.turning_left = False
         else:
