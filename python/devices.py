@@ -43,8 +43,8 @@ class Motor():
 
 class Robot():
     def __init__(self,output1: int,output2: int,enable1: int,output3: int,output4: int,enable2: int) -> None:
-        self.motor_left = Motor(output1 ,output2,enable1,40)
-        self.motor_right = Motor(output3,output4,enable2,40)
+        self.motor_left = Motor(output1 ,output2,enable1,80)
+        self.motor_right = Motor(output3,output4,enable2,80)
         self.moving_forward = False
         self.moving_backward = False
         self.turning_left = False
