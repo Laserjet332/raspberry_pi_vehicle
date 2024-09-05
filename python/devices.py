@@ -11,13 +11,12 @@ class DistanceSensor():
     
     def check_distance(self):
         GPIO.output(self.trigger,GPIO.HIGH)
-        while GPIO.input(self.echo) == 0:
-            pass
+        time.sleep(0.00001)
         GPIO.output(self.trigger,GPIO.LOW)
-        start = time.perf_counter()
+        while GPIO.input(self.echo) == 0:
+            start = time.perf_counter()
         while GPIO.input(self.echo) == 1:
-            pass
-        end = time.perf_counter()
+            end = time.perf_counter()
         t = end-start
         return 17150*t
         
