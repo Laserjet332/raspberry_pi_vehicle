@@ -1,10 +1,25 @@
 import RPi.GPIO as GPIO
+import time
 
 
 class DistanceSensor():
     def __init__(self,echo: int,trigger: int) -> None:
         self.echo = echo
+        GPIO.setup(echo,GPIO.IN)
         self.trigger = trigger
+        GPIO.setup(trigger,GPIO.OUT)
+    
+    def check_distance(self):
+        GPIO.output(self.trigger,GPIO.HIGH)
+        while GPIO.input(self.echo) == 0:
+            pass
+        GPIO.output(self.trigger,GPIO.LOW)
+        start = time.perf_counter()
+        while GPIO.input(self.echo) == 1:
+            pass
+        end = time.perf_counter()
+        t = end-start
+        return 17150*t
         
 
 class Motor():
@@ -148,5 +163,12 @@ class Robot():
         self.motor_left.change_speed(self.speed)
         self.motor_right.change_speed(self.speed)
     
-    def add_distance_sensor(self,sensor: type[DistanceSensor]):
-        pass
+    def add_distance_sensor(self,echo: int,trigger: int) -> None:
+        sensor = DistanceSensor(echo,trigger)
+        self.distance_sensors.append(sensor)
+    
+    def check_distance_sensors(self):
+        sensors_readings = []
+        for sensor in self.distance_sensors:
+            sensors_readings.append(sensor.check_distance())
+        return sensors_readings
