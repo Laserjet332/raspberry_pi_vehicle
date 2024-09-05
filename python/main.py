@@ -74,3 +74,4 @@ interface.window.bind("<KeyPress-a>",go_left)
 interface.window.bind("<KeyRelease-a>",stop_left)
 
 interface.window.mainloop()
+GPIO.cleanup()
