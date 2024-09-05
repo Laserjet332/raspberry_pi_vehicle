@@ -86,10 +86,14 @@ class Robot():
             else:
                 self.motor_left.stop()
                 self.motor_right.stop()
+                self.motor_left.change_speed(self.speed)
+                self.motor_right.change_speed(self.speed)
         elif self.moving_backward:
             self.moving_backward = False
             self.motor_left.stop()
             self.motor_right.stop()
+            self.motor_left.change_speed(self.speed)
+            self.motor_right.change_speed(self.speed)
     
     def right(self):
         if not self.moving_forward and not self.moving_backward and not self.turning_left:
@@ -111,6 +115,8 @@ class Robot():
         else:
             self.motor_right.stop()
             self.motor_left.stop()
+            self.motor_left.change_speed(self.speed)
+            self.motor_right.change_speed(self.speed)
             self.turning_right = False
     
     def left(self):
@@ -133,6 +139,8 @@ class Robot():
         else:
             self.motor_right.stop()
             self.motor_left.stop()
+            self.motor_left.change_speed(self.speed)
+            self.motor_right.change_speed(self.speed)
             self.turning_left = False
     
     def change_speed(self,speed):
