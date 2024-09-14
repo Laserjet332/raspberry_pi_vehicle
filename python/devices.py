@@ -8,15 +8,25 @@ class DistanceSensor():
         GPIO.setup(echo,GPIO.IN)
         self.trigger = trigger
         GPIO.setup(trigger,GPIO.OUT)
+        self.timeout = 0.011661807580
     
     def check_distance(self):
         GPIO.output(self.trigger,GPIO.HIGH)
         time.sleep(0.00001)
         GPIO.output(self.trigger,GPIO.LOW)
+        
+        start_time = time.perf_counter()
         while GPIO.input(self.echo) == 0:
             start = time.perf_counter()
+            if start - start_time > self.timeout:
+                return -1
+        
+        start_time = time.perf_counter()
         while GPIO.input(self.echo) == 1:
             end = time.perf_counter()
+            if end - start_time > self.timeout:
+                return -1
+            
         t = end-start
         return 17150*t
         
