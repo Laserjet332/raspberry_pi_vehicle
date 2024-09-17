@@ -19,13 +19,13 @@ class DistanceSensor():
         while GPIO.input(self.echo) == 0:
             start = time.perf_counter()
             if start - start_time > self.timeout:
-                return -1
+                raise TimeoutError("ECHO start signal timed out.")
         
         start_time = time.perf_counter()
         while GPIO.input(self.echo) == 1:
             end = time.perf_counter()
             if end - start_time > self.timeout:
-                return -1
+                raise TimeoutError("ECHO end signal timed out.")
             
         t = end-start
         return 17150*t
