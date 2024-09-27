@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "vehicle_circuit")(type "KiCad")(uri "${KIPRJMOD}/vehicle_circuit.kicad_sym")(options "")(descr ""))
+)
