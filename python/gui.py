@@ -43,6 +43,8 @@ def stop_forward(event):
     interface.up.config(relief="raised")
     robot.stop()
 
+interface.up.bind("<Button-1>",go_forward)
+interface.up.bind("<ButtonRelease-1>",stop_forward)
 interface.window.bind("<KeyPress-w>",go_forward)
 interface.window.bind("<KeyRelease-w>",stop_forward)
 
@@ -55,6 +57,8 @@ def stop_backward(event):
     interface.down.config(relief="raised")
     robot.stop()
 
+interface.down.bind("<Button-1>",go_backward)
+interface.down.bind("<ButtonRelease-1>",stop_backward)
 interface.window.bind("<KeyPress-s>",go_backward)
 interface.window.bind("<KeyRelease-s>",stop_backward)
 
@@ -67,6 +71,8 @@ def stop_right(event):
     interface.right.config(relief="raised")
     robot.stop_right()
 
+interface.right.bind("<Button-1>",go_right)
+interface.right.bind("<ButtonRelease-1>",stop_right)
 interface.window.bind("<KeyPress-d>",go_right)
 interface.window.bind("<KeyRelease-d>",stop_right)
 
@@ -79,6 +85,8 @@ def stop_left(event):
     interface.left.config(relief="raised")
     robot.stop_left()
 
+interface.left.bind("<Button-1>",go_left)
+interface.left.bind("<ButtonRelease-1>",stop_left)
 interface.window.bind("<KeyPress-a>",go_left)
 interface.window.bind("<KeyRelease-a>",stop_left)
 
