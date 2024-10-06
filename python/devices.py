@@ -29,6 +29,22 @@ class DistanceSensor():
             
         t = end-start
         return 17150*t
+
+    def check_distance_level(self):
+        try:
+            dist = self.check_distance()
+            level = 0
+            if 4 <= dist < 11:
+                return 1
+            elif 11 <= dist < 20:
+                return 2
+            elif 20 <= dist:
+                return 3
+        except:
+            level = -1
+        finally:
+            return level 
+        
         
 
 class Motor():
@@ -179,5 +195,5 @@ class Robot():
     def check_distance_sensors(self):
         sensors_readings = []
         for sensor in self.distance_sensors:
-            sensors_readings.append(sensor.check_distance())
+            sensors_readings.append(sensor.check_distance_level())
         return sensors_readings
