@@ -46,7 +46,6 @@ class DistanceSensor():
             return level 
         
         
-
 class Motor():
     def __init__(self,output1: int,output2: int,enable: int,speed: int) -> None:
         self.output1 = output1
