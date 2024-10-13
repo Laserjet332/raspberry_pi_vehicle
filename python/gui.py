@@ -11,8 +11,8 @@ OUTPUT4 = 2
 ENABLE2 = 4
 FONT = ("Ariel",20,"normal")
 
+
 class Interface:
-    
     def __init__(self):
         self.window = tk.Tk()
         self.window.title('Robot')
